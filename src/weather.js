@@ -1,7 +1,7 @@
-const ForecastIO = require('forecast-io');
+const DarkSky = require('dark-sky');
 const GoogleMapsClient = require('@google/maps');
 
-const forecast = new ForecastIO(process.env.FORECAST_TOKEN);
+const forecast = new DarkSky(process.env.FORECAST_TOKEN);
 const googleMapsClient = GoogleMapsClient.createClient({
   key: process.env.GMAP_KEY
 });
@@ -26,10 +26,7 @@ function getWeatherByCoords(coords) {
     .units('ca')
     .language('en')
     .exclude('minutely,flags')
-    .get()
-    .then(res => {
-      return JSON.parse(res);
-    });
+    .get();
 }
 
 function getWeatherByZipcode(zipcode) {
